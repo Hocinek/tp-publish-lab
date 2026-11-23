@@ -1,0 +1,8 @@
+{
+  "name": "tp-lab-a9123a",
+  "version": "0.0.1",
+  "description": "Security research lab: npm trusted publishing scope test. Not for use.",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/Hocinek/tp-publish-lab.git" }
+}

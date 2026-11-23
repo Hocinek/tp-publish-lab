@@ -1,0 +1,22 @@
+# Mirrors elastic/eui release.yml snapshot job: workflow-level id-token, checkout of caller-supplied ref,
+# release tool built/run from that ref.
+name: Release packages
+run-name: "Create snapshot release from ${{ inputs.release_ref }}"
+on:
+  workflow_dispatch:
+    inputs:
+      release_ref: { description: ref to release, required: true, type: string }
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  release_snapshot:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with: { ref: "${{ inputs.release_ref }}" }
+      - uses: actions/setup-node@v6
+        with: { node-version: 24, registry-url: 'https://registry.npmjs.org' }
+      - run: npm install -g npm@11.19.0
+      - name: Release
+        run: node release-cli.js
